@@ -60,18 +60,16 @@ function playRound(playerSelection, cpuSelection){
 
 function game(){
 
-    let rounds = 0;
+    let rounds = 1;
     let playerScore = 0;
     let cpuScore = 0;
     let playerInput;
     let computerInput;
 
-    while(rounds < 5 && playerScore < 3 && cpuScore < 3){
+    while(playerScore < 5 && cpuScore < 5){
 
         playerInput = prompt("Enter your choice");
         computerInput = computerPlay();
-        
-        console.log(playRound(playerInput,computerInput));
 
         if(playRound(playerInput,computerInput).substring(0,7) == "You Win"){
             playerScore++;
@@ -79,6 +77,8 @@ function game(){
         else if(playRound(playerInput,computerInput).substring(0,8) == "You Lose"){
             cpuScore++;
         }
+
+        rounds++;
 
     }
 
