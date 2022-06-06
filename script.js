@@ -14,15 +14,23 @@ function computerPlay(){
 
 }
 
+
+const results = document.querySelector("#results");
+let playerScore = 0;
+let cpuScore = 0;
+let canPlay = true;
+let round = 1;
+
 function playRound(playerSelection, cpuSelection){
 
     const player = playerSelection.toUpperCase();
     const cpu = cpuSelection.toUpperCase();
+    const roundCounter = document.querySelector("#roundCounter");
+    roundCounter.textContent = `Round: ${round}`;
     let win = false;
     let tie = false;
 
     if(player === cpu){
-        return "It's a tie!";
         tie = true;
     }
     else if(player === "ROCK"){
@@ -42,51 +50,28 @@ function playRound(playerSelection, cpuSelection){
     }
 
 
-    let result = ``;
-
     if(win === true){
-        result = `You Win! ${player} beats ${cpu}!`;
+        results.textContent = `You Win! ${player} beats ${cpu}!`;
+        playerScore++;
     }
     else if(tie === true){
-        result = "It's a tie!";
+        results.textContent = "It's a tie!";
     }
     else{
-        result = `You Lose! ${cpu} beats ${player}`;
+        results.textContent = `You Lose! ${cpu} beats ${player}`;
+        cpuScore++;
     }
 
-    return result;
 
-}
-
-function game(){
-
-    let rounds = 1;
-    let playerScore = 0;
-    let cpuScore = 0;
-    let playerInput;
-    let computerInput;
-
-    while(playerScore < 5 && cpuScore < 5){
-
-        playerInput = prompt("Enter your choice");
-        computerInput = computerPlay();
-
-        if(playRound(playerInput,computerInput).substring(0,7) == "You Win"){
-            playerScore++;
-        }
-        else if(playRound(playerInput,computerInput).substring(0,8) == "You Lose"){
-            cpuScore++;
-        }
-
-        rounds++;
-
+    if(playerScore >= 5){
+        results.textContent = "Congratulations! You won the series!";
+        canPlay = false;
+    }
+    if(cpuScore >= 5){
+        results.textContent = "The CPU won! Better luck next time!";
+        canPlay = false;
     }
 
-    if(playerScore === 3){
-        console.log("Congratulations! You won the series!");
-    }
-    else{
-        console.log("The CPU won! Better luck next time.");
-    }
+    round++;
 
 }
