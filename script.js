@@ -1,4 +1,16 @@
-function computerPlay(){
+// Game variables that only need to be declared once
+
+const results = document.querySelector("#results");
+let playerScore = 0;
+const playerDisplay = document.querySelector("#playerScore");
+let cpuScore = 0;
+const cpuDisplay = document.querySelector("#cpuScore");
+let round = 1;
+const roundDisplay = document.querySelector("#roundCounter");
+let canPlay = true;
+
+
+function computerPlay(){    // generates a random choice for the computer
 
     const randIndex = Math.floor(Math.random() * 3);
 
@@ -14,34 +26,57 @@ function computerPlay(){
 
 }
 
-function createRestart(){
-    const body = document.querySelector("body");
-    const restart = document.createElement("button");
-    restart.setAttribute("id","restartButton");
-    restart.textContent = "Restart?"
-    body.appendChild(restart);
+function updateDisplay(){   // updates the round counter
+
+    playerDisplay.textContent = `Player: ${playerScore}`;
+    cpuDisplay.textContent = `CPU: ${cpuScore}`;
+    roundDisplay.textContent = `Round: ${round}`;
+
 }
 
 
-const results = document.querySelector("#results");
-let playerScore = 0;
-const playerDisplay = document.querySelector("#playerScore");
-let cpuScore = 0;
-const cpuDisplay = document.querySelector("#cpuScore");
-let canPlay = true;
-let round = 1;
+function createRestart(){   // creates the restart button element - only triggered if the button doesn't exist
+
+    const body = document.querySelector("body");
+    const restart = document.createElement("button");
+
+    restart.setAttribute("id","restartButton");
+    restart.textContent = "Restart?"
+
+    restart.addEventListener("click", function(){ restartGame(); })
+    body.appendChild(restart);
+
+}
 
 
-function playRound(playerSelection, cpuSelection){
+function restartGame(){  // resets the scores and rounds so the game can be replayed
+
+    canPlay = true;
+    round = 1;
+    playerScore = 0;
+    cpuScore = 0;
+
+    const findRestart = document.getElementById("restartButton");
+    const body = document.querySelector("body");
+    body.removeChild(findRestart);
+
+    updateDisplay();
+    results.textContent = "Click an image to start!";
+
+}
+
+
+
+function playRound(playerSelection, cpuSelection){  // handles who wins a round and checks if the game is over
 
     if(canPlay){
+
         const player = playerSelection.toUpperCase();
         const cpu = cpuSelection.toUpperCase();
-        const roundCounter = document.querySelector("#roundCounter");
-        roundCounter.textContent = `Round: ${round}`;
         let win = false;
         let tie = false;
 
+        // checks for win / tie
         if(player === cpu){
             tie = true;
         }
@@ -61,7 +96,7 @@ function playRound(playerSelection, cpuSelection){
             }
         }
 
-
+        // Updates results
         if(win === true){
             results.textContent = `You Win! ${player} beats ${cpu}!`;
             playerScore++;
@@ -74,9 +109,7 @@ function playRound(playerSelection, cpuSelection){
             cpuScore++;
         }
 
-        playerDisplay.textContent = `Player: ${playerScore}`;
-        cpuDisplay.textContent = `CPU: ${cpuScore}`;
-
+        // checks if game is over
         if(playerScore >= 5){
             results.textContent = "Congratulations! You won the series!";
             canPlay = false;
@@ -86,9 +119,13 @@ function playRound(playerSelection, cpuSelection){
             canPlay = false;
         }
 
+        // adds to the round counter if the game isn't over yet
         if(canPlay){
             round++;
         }
+
+        updateDisplay();
+
     }
 
     let restartExists = document.getElementById("restartButton");
@@ -98,9 +135,10 @@ function playRound(playerSelection, cpuSelection){
 
 }
 
+
+// behavior for the rock, paper, and scissors buttons
+
 const buttons = document.querySelectorAll(".button");
 for(const button of buttons){
     button.addEventListener("click", function(e){ playRound(e.target.id,computerPlay()); })
 }
-
-

@@ -72,7 +72,7 @@ body {
     text-align: center;
     font-size: 20px;
     padding: 10px 50px;
-    margin: 12px;
+    margin: 14px;
     border: 2px solid #434343ab;
     border-radius: 32px;
     background-image: linear-gradient(#afd8f0,#3bb7ff);
@@ -81,4 +81,5 @@ body {
 
 #restartButton:hover {
     background-image: linear-gradient(#d9eefa,#3bb7ff);
+    transform: scale(1.02);
 }
