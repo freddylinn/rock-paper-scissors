@@ -1,0 +1,69 @@
+* {
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #b6c2cc;
+    color: white;
+    text-shadow: 1px 1px 5px black;
+}
+
+.scoreContainer {
+    display: flex;
+    justify-content: center;
+    gap: 128px;
+    margin-top: 24px;
+    margin-bottom: 42px;
+    font-size: 24px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.button {
+    object-fit: cover;
+    width: 300px;
+    height: 300px;
+    border: 8px solid #599ccf;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    box-shadow: 2px 1px 5px #434343;
+}
+
+.button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 32px #0e5993;
+}
+
+.buttonCaption {
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px black;
+}
+
+#header {
+    font-family: "Arial Black", sans-serif;
+    font-size: 48px;
+    text-shadow: 2px 2px 8px black;
+    text-align: center;
+}
+
+#roundCounter {
+    margin-top: 24px;
+    font-size: 24px;
+}
+
+#results {
+    font-size: 24px;
+    color: #3a555f;
+    text-shadow: none;
+}
